@@ -1,53 +1,320 @@
-nginx (1.8.0-9ppa) stable; urgency=high
+nginx (1.10.0-1) stable; urgency=high
 
-  * Improved SSL Cipher for better security and support with HTTP2
+  * Package upload for xenial.
 
- -- rtCamp <sys@rtcamp.com>  Tue, 5 Jan 2016 16:49:16 +0530
+ -- Prabuddha Chakraborty <prabuddha.nike13@gmail.com>  Thu, 11 May 2016 15:04:13 -0400
 
-nginx (1.8.0-8ppa) stable; urgency=high
+nginx (1.10.0-0+xenial0) xenial; urgency=medium
 
-  * Added memc-nginx-module into nginx-custom package
-  * Added srcache-nginx-module into nginx-custom package
-  * Added HttpRedisModule into nginx-custom package
-  * Added redis2-nginx-module into nginx-custom package
-  * Added nginx-development-kit into nginx-custom package
-  * Added set-misc-nginx-module into nginx-custom package
-  * Updated ngx_pagespeed to 1.9.32.4
+  * Package upload for xenial.
 
- -- rtCamp <sys@rtcamp.com>  Thu, 25 Jun 2015 12:00:00 +0530
+ -- Thomas Ward <teward@ubuntu.com>  Thu, 05 May 2016 15:04:13 -0400
 
-nginx (1.8.0-7ppa) stable; urgency=high
+nginx (1.10.0-0) UNRELEASED; urgency=medium
 
-  * Updated core Nginx config with fixing SSL bug
+  * New upstream release (1.10.0).  1.10.x is now Stable branch, cut from
+    Mainline 1.9.x branch.
+  * Upstream changelog from 1.9.15 to 1.10.0: (dated 26 Apr 2016):
+    * 1.10.x stable branch.
 
- -- rtCamp <sys@rtcamp.com>  Wed, 27 May 2015 14:20:00 +0530
+ -- Thomas Ward <teward@ubuntu.com>  Thu, 05 May 2016 15:02:46 -0400
 
-nginx (1.8.0-6ppa) stable; urgency=high
+nginx (1.9.15-0) UNRELEASED; urgency=medium
 
-  * Updated core Nginx config
+  * New upstream release (1.9.15).
+  * Upstream changelog from 1.9.14 to 1.9.15: (dated 19 Apr 2016):
+    * Bugfix: "recv() failed" errors might occur when using HHVM as a
+      FastCGI server.
+    * Bugfix: when using HTTP/2 and the "limit_req" or "auth_request"
+      directives a timeout or a "client violated flow control" error might
+      occur while reading client request body; the bug had appeared in
+      1.9.14.
+    * Workaround: a response might not be shown by some browsers if HTTP/2
+      was used and client request body was not fully read; the bug had
+      appeared in 1.9.14.
+    * Bugfix: connections might hang when using the "aio threads"
+      directive.
+      Thanks to Mindaugas Rasiukevicius.
 
- -- rtCamp <sys@rtcamp.com>  Tue, 26 May 2015 19:40:00 +0530
+ -- Thomas Ward <teward@ubuntu.com>  Thu, 05 May 2016 15:02:42 -0400
 
-nginx (1.8.0-5ppa) stable; urgency=high
+nginx (1.9.14-0+xenial0) xenial; urgency=medium
 
-  * Merge nginx config and EasyEngine config
+  * Package upload for xenial.
 
- -- rtCamp <sys@rtcamp.com>  Mon, 25 May 2015 19:40:00 +0530
+ -- Thomas Ward <teward@ubuntu.com>  Tue, 12 Apr 2016 19:20:26 -0400
 
-nginx (1.6.2-2ppa) stable; urgency=high
+nginx (1.9.14-0) UNRELEASED; urgency=medium
 
-  * Remove nginx-naxsi package
-  * Remove nginx-pagespeed package
-  * Add ngx_pagespeed module in nginx-extras
-  * Add nginx-lua, ngx-fancyindex and ngx_pagespeed in nginx-custom package
+  * New upstream release (1.9.14)
+  * Upstream changelog from 1.9.13 to 1.9.14: (dated 04 Apr 2016):
+    * Feature: OpenSSL 1.1.0 compatibility.
+    * Feature: the "proxy_request_buffering", "fastcgi_request_buffering",
+      "scgi_request_buffering", and "uwsgi_request_buffering" directives
+      now work with HTTP/2.
+    * Bugfix: "zero size buf in output" alerts might appear in logs when
+      using HTTP/2.
+    * Bugfix: the "client_max_body_size" directive might work incorrectly
+      when using HTTP/2.
+    * Bugfix: of minor bugs in logging.
 
- -- Mitesh Shah <Mr.Miteshah@gmail.com>  Mon, 10 Nov 2014 12:41:53 +0530
+ -- Thomas Ward <teward@ubuntu.com>  Tue, 12 Apr 2016 19:19:31 -0400
 
-nginx (1.6.2-4+stable0) stable; urgency=high
+nginx (1.9.13-0+xenial0) xenial; urgency=medium
 
-  * Resync with Debian
+  * Package upload for xenial.
 
- -- Thomas Ward <teward@dark-net.net>  Wed, 22 Oct 2014 12:34:53 -0400
+ -- Thomas Ward <teward@ubuntu.com>  Mon, 04 Apr 2016 20:03:26 -0400
+
+nginx (1.9.13-0) UNRELEASED; urgency=medium
+
+  * New upstream release (1.9.13)
+  * Upstream changelog from 1.9.12 to 1.9.13: (dated 29 Mar 2016)
+    * Change: non-idempotent requests (POST, LOCK, PATCH) are no longer
+      passed to the next server by default if a request has been sent to a
+      backend; the "non_idempotent" parameter of the "proxy_next_upstream"
+      directive explicitly allows retrying such requests.
+    * Feature: the ngx_http_perl_module can be built dynamically.
+    * Feature: UDP support in the stream module.
+    * Feature: the "aio_write" directive.
+    * Feature: now cache manager monitors number of elements in caches and
+      tries to avoid cache keys zone overflows.
+    * Bugfix: "task already active" and "second aio post" alerts might
+      appear in logs when using the "sendfile" and "aio" directives with
+      subrequests.
+    * Bugfix: "zero size buf in output" alerts might appear in logs if
+      caching was used and a client closed a connection prematurely.
+    * Bugfix: connections with clients might be closed needlessly if
+      caching was used.
+      Thanks to Justin Li.
+    * Bugfix: nginx might hog CPU if the "sendfile" directive was used on
+      Linux or Solaris and a file being sent was changed during sending.
+    * Bugfix: connections might hang when using the "sendfile" and "aio
+      threads" directives.
+    * Bugfix: in the "proxy_pass", "fastcgi_pass", "scgi_pass", and
+      "uwsgi_pass" directives when using variables.
+      Thanks to Piotr Sikora.
+    * Bugfix: in the ngx_http_sub_filter_module.
+    * Bugfix: if an error occurred in a cached backend connection, the
+      request was passed to the next server regardless of the
+      proxy_next_upstream directive.
+    * Bugfix: "CreateFile() failed" errors when creating temporary files on
+      Windows.
+
+ -- Thomas Ward <teward@ubuntu.com>  Mon, 04 Apr 2016 20:02:00 -0400
+
+nginx (1.9.12-0+xenial1) xenial; urgency=medium
+
+  * debian/conf/sites-available/default: Modify PHP 'default example' settings
+    to account for php5 being replaced with php7.0 in Xenial. Also adapt the
+    UNIX socket path for php7.0-fpm to be the one used by default in Xenial.
+    (Borrowed from Ubuntu; LP: #1547642)
+
+ -- Thomas Ward <teward@ubuntu.com>  Tue, 15 Mar 2016 13:32:55 -0400
+
+nginx (1.9.12-0+xenial0) xenial; urgency=medium
+
+  * Package upload for xenial.
+
+ -- Thomas Ward <teward@ubuntu.com>  Tue, 15 Mar 2016 13:24:47 -0400
+
+nginx (1.9.12-0) UNRELEASED; urgency=medium
+
+  * New upstream release (1.9.12)
+  * Upstream changelog from 1.9.11 to 1.9.12: (dated 24 Feb 2016)
+    * Feature: Huffman encoding of response headers in HTTP/2.
+      Thanks to Vlad Krasnov.
+    * Feature: the "worker_cpu_affinity" directive now supports more than
+      64 CPUs.
+    * Bugfix: compatibility with 3rd party C++ modules; the bug had
+      appeared in 1.9.11.
+      Thanks to Piotr Sikora.
+    * Bugfix: nginx could not be built statically with OpenSSL on Linux;
+      the bug had appeared in 1.9.11.
+    * Bugfix: the "add_header ... always" directive with an empty value did
+      not delete "Last-Modified" and "ETag" header lines from error
+      responses.
+    * Workaround: "called a function you should not call" and "shutdown
+      while in init" messages might appear in logs when using OpenSSL
+      1.0.2f.
+    * Bugfix: invalid headers might be logged incorrectly.
+    * Bugfix: socket leak when using HTTP/2.
+    * Bugfix: in the ngx_http_v2_module.
+
+ -- Thomas Ward <teward@ubuntu.com>  Tue, 15 Mar 2016 13:23:26 -0400
+
+nginx (1.9.11-0+xenial0) xenial; urgency=medium
+
+  * Package upload for xenial
+  * debian/modules/nginx-lua: Apply upstream patch to change the UDP resolver
+    name and struct, to address a Fail to Build issue.
+
+ -- Thomas Ward <teward@ubuntu.com>  Fri, 19 Feb 2016 15:16:46 -0500
+
+nginx (1.9.11-0) UNRELEASED; urgency=medium
+
+  * New upstream release (1.9.11)
+  * Upstream changelog from 1.9.10 to 1.9.11: (dated 09 Feb 2016)
+    * Feature: TCP support in resolver.
+    * Feature: dynamic modules.
+    * Bugfix: the $request_length variable did not include size of request
+      headers when using HTTP/2.
+    * Bugfix: in the ngx_http_v2_module.
+
+ -- Thomas Ward <teward@ubuntu.com>  Fri, 19 Feb 2016 15:15:21 -0500
+
+nginx (1.9.10-1+xenial0) xenial; urgency=medium
+
+  * Resync PPA with Debian.
+  * Upload for xenial.
+
+ -- Thomas Ward <teward@ubuntu.com>  Tue, 26 Jan 2016 18:28:22 -0500
+
+nginx (1.9.10-1) unstable; urgency=medium
+
+  [ Christos Trochalakis ]
+  * New upstream release (1.9.10) (Closes: #812806)
+  * debian/control:
+    + Drop python dependency from nginx-ee. (Closes: #808699)
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Tue, 26 Jan 2016 20:12:06 +0200
+
+nginx (1.9.9-1) unstable; urgency=medium
+
+  [ Michael Lustfield ]
+  * debian/nginx-ee.nginx.logrotate:
+    + Switching logrotate to 14 days. (Closes: #805322)
+
+  [ Christos Trochalakis ]
+  * New upstream release (1.9.9).
+  * debian/modules/nginx-lua:
+    + Update nginx-lua to v0.10.0.
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Thu, 14 Jan 2016 10:40:35 +0200
+
+nginx (1.9.6-2) unstable; urgency=medium
+
+  [ Christos Trochalakis]
+  * debian/modules/nginx-lua:
+    + Update nginx-lua to v0.9.19 fixing HTTP/2 compatibility.
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Fri, 13 Nov 2015 16:08:01 +0200
+
+nginx (1.9.6-1) unstable; urgency=medium
+
+  [ Christos Trochalakis]
+  * New upstream release.
+  * Enable http2 module in nginx-full & nginx-extras
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Tue, 03 Nov 2015 08:59:21 +0200
+
+nginx (1.9.4-1) unstable; urgency=medium
+
+  [ Christos Trochalakis]
+  * New upstream release.
+  * debian/copyright:
+    + Fix licence order.
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Mon, 24 Aug 2015 16:23:20 +0300
+
+nginx (1.9.3-1) unstable; urgency=medium
+
+  [ Christos Trochalakis]
+  * New upstream Release. (Closes: #789924)
+  * debian/control:
+    + Remove XS-Testsuite header, it is now automatically added when
+      `debian/tests/control` is present.
+  * debian/modules/nginx-lua:
+    + Update nginx-lua to v0.9.16 and drop our backported patches.
+  * debian/conf/*:
+    + Add REQUEST_SCHEME to fcgi, wsgi and scgi configs (sync with upstream).
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Tue, 14 Jul 2015 20:24:52 +0300
+
+nginx (1.9.2-1) unstable; urgency=medium
+
+  [ Michael Lustfield ]
+  * debian/nginx-ee.nginx.init:
+    + Init script now returns the proper exit status. (Closes: #788573)
+    + Cleaned up the init script to have consistent naming/structure.
+
+  [ Christos Trochalakis ]
+  * New upstream Release.
+  * debian/rules:
+    + Add stream module to nginx-full & nginx-extras.
+    + Add thread pool support to nginx-full & nginx-extras.
+  * debian/modules/nginx-lua:
+    + Backport upstream's 9531e5e7 fixing build failure when thread pool
+      support is enabled.
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Mon, 22 Jun 2015 10:16:19 +0300
+
+nginx (1.9.1-1) unstable; urgency=medium
+
+  [ Michael Lustfield ]
+  * debian/conf/nginx.conf:
+    + Switch worker_processes to auto. (Closes: #781711)
+  * debian/conf/sites-available/default:
+    + Add comment about disabling gzip in HTTPS. (Closes: #773332)
+    + Add comment about checking ssl_ciphers. (Closes: #765782)
+  * debian/modules/*:
+    + Updated nginx-auth-pam 1.3 -> 1.4. (Closes: #777120)
+    + Updated nginx-echo v0.56 -> v0.57.
+    + Updated nginx-lua v0.9.13 -> v0.9.15.
+    + Updated nginx-cache-purge 2.1 -> 2.3.
+    + Updated ngx-fancyindex v0.3.4 -> v0.3.5.
+  * debian/nginx-ee.NEWS:
+    + Document potential issues with newer versions on i386.
+  * debian/nginx-ee.{dirs,install}, debian/vim/*:
+    + Installing vim syntax highlighting from package. (Closes: #771609)
+      Thanks Emmanuel Bouthenot for building this patch.
+  * debian/nginx-ee.nginx.upstart:
+    + Created file to support upstart jobs. (Closes: #745483)
+      Thanks Cameron Norman for building this file.
+  * debian/rules:
+    + Add hardening flags with dpkg-buildflags. (Closes: #747025, #781703)
+      Thanks Thomas Ward.
+    + Supply custom DEB_BUILD_MAINT_OPTIONS for debian_ldflags generation.
+      Thanks Thomas Ward.
+    + Added back missing module gunzip. (Closes: #782065)
+      Thanks Peter Wu for the initial patch.
+  * debian/modules/nginx-lua/*:
+    + Updated module version. (Closes: #762494)
+  * debian/ngx-conf/*
+    + Added configuration utility, not shipped yet. (Closes: #652108)
+  * debian/nginx-ee.manpages:
+    + Replaced man page with upstream maintained version. (Closes: #781345)
+  * debian/nginx-ee.install:
+    + Changed debian/index.html -> html/index.html. This installs the package
+      maintained version of this file as opposed to our out of date version.
+
+  [ Christos Trochalakis ]
+  * New upstream release. Switching to mainline version. (Closes: #777677)
+  * debian/nginx-ee.manpages:
+    + Build & ship manpages with binary packages.
+  * debian/rules:
+    + Adjust configure flags for limit_zone module (renamed to limit_conn).
+  * debian/modules/nginx-lua:
+    + Backport upstream's f4e1311 fixing build failure with mainline nginx.
+  * debian/control:
+    + Depend on libgd-dev now that jessie is released.
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Fri, 12 Jun 2015 15:42:49 +0300
+
+nginx (1.6.2-5) unstable; urgency=medium
+
+  [ Christos Trochalakis ]
+  * debian/conf/nginx.conf:
+    + Drop SSLv3 protocol (POODLE), and prefer server ciphers
+      by default. (Closes: #767456)
+  * debian/copyright:
+    + Add copyright for ngx_http_substitutions_filter_module.
+  * debian/nginx-ee.{preinst,postinst,postrm}:
+    + Remove /etc/nginx/naxsi-ui.conf conffile. (Closes: #768233)
+  * debian/README.Debian:
+    + Add a list of important changes since wheezy.
+
+ -- Christos Trochalakis <yatiohi@ideopolis.gr>  Sun, 30 Nov 2014 10:39:55 +0200
 
 nginx (1.6.2-4) unstable; urgency=medium
 
@@ -62,7 +329,7 @@ nginx (1.6.2-4) unstable; urgency=medium
     + Upgrade v0.3.3 -> v0.3.4
   * debian/copyright:
     + Rewrite copyright file fixing various issues.
-  * debian/nginx-common.nginx.logrotate:
+  * debian/nginx-ee.nginx.logrotate:
     + Switch postrotate to the initscript's rotate command.
 
  -- Christos Trochalakis <yatiohi@ideopolis.gr>  Sun, 19 Oct 2014 08:23:33 +0300
@@ -73,9 +340,9 @@ nginx (1.6.2-3) unstable; urgency=medium
   * Change the default document root to /var/www/html according to debian
     policy 3.9.6.0. (Closes: #730382)
   * Provide a new, debian specific, default landing page.
-  * debian/nginx-common.nginx.service:
+  * debian/nginx-ee.nginx.service:
     + Graceful stopping of nginx was not handled correctly with systemd.
-  * debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.init:
     + Gracefully stop nginx by default, we are switcing to a configurable
       STOP/5/TERM/5/KILL/5 schedule. We are now in sync with the systemd
       service file. (Closes: #762708)
@@ -86,7 +353,7 @@ nginx (1.6.2-3) unstable; urgency=medium
       using the certs installed by the ssl-cert package.
     + Suggest disabling SSLv3 in default site with a ref to POODLE.
   * debian/control:
-    + nginx-common now suggests ssl-cert.
+    + nginx-ee now suggests ssl-cert.
 
  -- Christos Trochalakis <yatiohi@ideopolis.gr>  Thu, 16 Oct 2014 13:34:29 +0300
 
@@ -118,7 +385,7 @@ nginx (1.6.1-2) unstable; urgency=medium
     + Build nginx-extras against luajit (Closes: #755875)
   * debian/modules/nginx-lua:
     + Update nginx-lua to v0.9.12
-  * debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.init:
     + Better pidfile extraction from nginx.conf (Closes: #747329)
   * debian/conf/mime.types:
     + Upgrade to the latest upstream mime types.
@@ -136,7 +403,7 @@ nginx (1.6.1-2) unstable; urgency=medium
       This change might break fastcgi sites. (Closes: #718639)
   + debian/conf/fastcgi.conf:
     + Ship upstream file.
-  * debian/nginx-common.NEWS:
+  * debian/nginx-ee.NEWS:
     + Document syncing conf files with upstream.
   * debian/tests/control:
     + Include some simple autopkgtests.
@@ -249,7 +516,7 @@ nginx (1.4.5-1) unstable; urgency=medium
   * debian/nginx-*.prerm:
     + No need to check for invoke-rc.d,
       correctly set the exit code on error
-  * debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.init:
     + Rewrite some parts of the initscript
     + Introduce rotate command
     + Introduce upgrade command
@@ -259,7 +526,7 @@ nginx (1.4.5-1) unstable; urgency=medium
 nginx (1.4.4-4) unstable; urgency=medium
 
   [ Christos Trochalakis ]
-  * debian/nginx-common.postinst:
+  * debian/nginx-ee.postinst:
     + Fix log re-opening issue due to wrong /var/log/nginx
       permissions. (Closes: #734139)
 
@@ -280,18 +547,18 @@ nginx (1.4.4-2) unstable; urgency=low
     + Added Provides: httpd-cgi to packages. (Closes: #701508)
     + Added other options to nginx depends. (Closes: #729860)
     + Added Spdy to nginx-full package description.
-  * debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.init:
     + Added missing line from patch. (Closes: #728103)
   * debian/conf/sites-available/default:
     + Changed ssl_protocols and ssl_ciphers. (Closes: 730142)
-  * debian/nginx-common.preinst:
+  * debian/nginx-ee.preinst:
     + Modify permissions of /var/log/nginx. (Closes: #701112)
   * debian/rules:
     + Added spdy support to nginx-full. (Closes: #730432)
 
   [ Christos Trochalakis ]
-  * debian/nginx-doc,docs, debian/nginx-common.NEWS:
-    + Ship NEWS with nginx-common instead of nginx-doc.
+  * debian/nginx-doc,docs, debian/nginx-ee.NEWS:
+    + Ship NEWS with nginx-ee instead of nginx-doc.
   * debian/conf/proxy_params:
     + Host header should be passed unmodified to the proxied server.
     + Pass X-Forwarded-Proto header to the proxied server.
@@ -328,7 +595,7 @@ nginx (1.4.4-1) unstable; urgency=low
   [ Michael Lustfield ]
   * debian/control:
     + Added spdy to package description (Closes: #728038)
-  * debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.init:
     + Showing better start/stop messages. Thanks Pim van den Berg.
       (Closes: #728103)
 
@@ -337,19 +604,19 @@ nginx (1.4.4-1) unstable; urgency=low
 nginx (1.4.3-2) unstable; urgency=low
 
   [ Kartik Mistry ]
-  * Renamed debian/nginx-common.service to debian/nginx-common.nginx.service so
+  * Renamed debian/nginx-ee.service to debian/nginx-ee.nginx.service so
     it is installed properly for systemd. Thanks to Christos Trochalakis.
   * Set debian/compat to 9 and updated debhelper dependency.
 
   [ Christos Trochalakis ]
-  * debian/rules, debian/nginx-common.dirs,
+  * debian/rules, debian/nginx-ee.dirs,
     debian/debian-common.nginx.logrotate:
     + Switch to dh_installlogrotate.
   * debian/rules:
     + *-stamp files are deleted by dh_clean.
     + Remove unused mime-types target.
     + Remove not needed config.sub and config.guess targets.
-  * debian/nginx-common.dirs:
+  * debian/nginx-ee.dirs:
     + Don't ship an empty /run dir.
   * debian/nginx-{light,full,extras}.lintian-overrides:
     + Override false lintian spelling error warning.
@@ -371,7 +638,7 @@ nginx (1.4.3-1) unstable; urgency=low
 
   [ Christos Trochalakis ]
   * New upstream release. (Closes: #722640)
-  * debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.init:
     + Better pidfile extraction from nginx.conf. We now accept multiple
       spaces and tabs as a field separator.
   * debian/modules/nginx-auth-pam:
@@ -505,7 +772,7 @@ nginx (1.2.6-1) unstable; urgency=low
 
   [ Kartik Mistry ]
   * New upstream release.
-  * debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.init:
     + Used log_*_msg instead of echo for better init messages.
     + Added patch to check start-stop-daemon exit status, Thanks to
       Sergey B Kirpichev <skirpichev@gmail.com> (Closes: #695374).
@@ -549,14 +816,14 @@ nginx (1.2.4-2) unstable; urgency=low
 nginx (1.2.4-1) unstable; urgency=low
 
   [ Michael Lustfield ]
-  * debian/nginx-common.nginx.init
+  * debian/nginx-ee.nginx.init
     + Added --retry to start-stop-daemon. (Closes: #682360)
     + Added $named to Required-Start/Stop. (Closes: #679879)
     + Added some other modifications after testing. (LP: #1033856)
   * debian/rules:
     + Added -DFORTIFY_SOURCE=2 -fstack-protector to build flags.
       (Closes: #680712)
-  * debian/nginx-common.install:
+  * debian/nginx-ee.install:
     + Moved default docs to /usr/share/nginx/html. (Closes: #1031515)
   * debian/rules:
     + Set prefix to /usr/share/nginx.
@@ -567,12 +834,12 @@ nginx (1.2.4-1) unstable; urgency=low
   * debian/copyright:
     + Removed trailing slash from File: fields.
   * Changed /var/run to /run in multiple files. (LP: #1050516)
-  * debian/nginx-common.dirs:
+  * debian/nginx-ee.dirs:
     + Added /run to .dirs to avoid conflicts with backports. (LP: #1072641)
   * debian/nginx-*.postinst:
     + Added sites-enabled/available directory checks. (Closes: #688410)
       - Thanks Andreas Marschke <andreas.marschke@gmail.com>
-    + Moved the symlink creation to nginx-common.
+    + Moved the symlink creation to nginx-ee.
   * Updated debconf templates.
   * conf/sites-available/default:
     + Updated root to point at /usr/share/nginx/html instead of www.
@@ -590,10 +857,10 @@ nginx (1.2.1-2.2) unstable; urgency=low
 
   * Non-maintainer upload.
   * Fix "removes files that were installed by another package":
-    don't remove directories that are owned by (and removed from) nginx-common
+    don't remove directories that are owned by (and removed from) nginx-ee
     from nginx-extras.postrm. This seems to have been the idea in commit e30a854
-    ("Moved configuration purging to nginx-common.") except that it was added
-    in nginx-common.postrm without being removed in nginx-extras.postrm.
+    ("Moved configuration purging to nginx-ee.") except that it was added
+    in nginx-ee.postrm without being removed in nginx-extras.postrm.
     Remove nginx-extras.postrm since it's empty after this change.
     (Closes: #681758)
 
@@ -678,7 +945,7 @@ nginx (1.2.1-1) unstable; urgency=medium
     + Added postrm and prerm scripts for nginx-naxsi-ui. (Closes: #673787)
 
   [Michael Lustfield]
-  * debian/nginx-common.preinst:
+  * debian/nginx-ee.preinst:
     + Copied install stuff to upgrade in case statement. (LP: #1014506)
   * debian/rules
     + Added --with-pcre-jit to build. (LP: #915344)
@@ -718,7 +985,7 @@ nginx (1.2.0-1) unstable; urgency=low
     debian/naxsi-ui-intercept.1, debian/rules:
     + Added nginx-naxsi-ui package containing the learning daemon
       and the WebUI.
-  * debian/nginx-common.nginx.default, debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.default, debian/nginx-ee.nginx.init:
     + Renamed files to be compliant with the nginx-naxsi-ui package.
   * debian/po:
     + Added needed files for using po-debconf.
@@ -737,7 +1004,7 @@ nginx (1.2.0-1) unstable; urgency=low
     + wrap-and-sort.
   * debian/copyright:
     + Added missing copyrights, minor formatting fixes.
-  * debian/nginx-common.nginx.init:
+  * debian/nginx-ee.nginx.init:
     + Added ulimit for restarts, Thanks to Daniel Roschka
       <danielroschka@phoenitydawn.de> for patch. (Closes: #673580)
   * debian/conf/sites-available/default:
@@ -815,8 +1082,8 @@ nginx (1.1.17-1) unstable; urgency=medium
       the patch) (Closes: #664090).
   * debian/conf/sites-available/default:
     + Added the fastcgi_pass for php5-fpm. (Closes: #662997)
-  * debian/nginx-common.postrm, debian/rules, debian/nginx-common.postinst,
-    debian/nginx-common.prerm, debian/nginx-common.service:
+  * debian/nginx-ee.postrm, debian/rules, debian/nginx-ee.postinst,
+    debian/nginx-ee.prerm, debian/nginx-ee.service:
     + Added the systemd support. Thanks to Michael Stapelberg for the patch.
       (Closes: #662799)
 
@@ -835,7 +1102,7 @@ nginx (1.1.16-1) unstable; urgency=low
     + Use wrap-and-sort to wrap control file fields.
 
   [Michael Lustfield]
-  * debian/nginx-common.postinst:
+  * debian/nginx-ee.postinst:
     + Changed postinst to not change permissions on all log files.
       (Closes: #658492)
   * debian/rules:
@@ -941,10 +1208,10 @@ nginx (1.1.8-1) unstable; urgency=low
     + Added Map module to nginx-light modules list.
   * debian/rules:
     + Removed --without-http_map_module form nginx-light.
-  * debian/nginx-common.install:
+  * debian/nginx-ee.install:
     + Changed ufw profile installation (LP: #825349).
       - debian/ufw.profile -> debian/ufw/nginx.
-  * debian/nginx-common.preinst:
+  * debian/nginx-ee.preinst:
     + Cleanup of moved nginx profile.
   * debian/conf/nginx.conf:
     + Added a default map for $server_https (on|off).
@@ -1002,7 +1269,7 @@ nginx (1.1.2-1) unstable; urgency=low
     + Updated email address for Michael Lustfield
   * debian/control:
     + Updated email address for Michael Lustfield
-    + Updated Breaks on nginx-common to address conflicting versions
+    + Updated Breaks on nginx-ee to address conflicting versions
 
  -- Kartik Mistry <kartik@debian.org>  Wed, 07 Sep 2011 12:15:36 +0530
 
@@ -1107,11 +1374,11 @@ nginx (0.8.54-4) unstable; urgency=low
     + Added patch to add $time_iso8601 variable to logs. (Closes: #609343)
   * Clean up old logrotate files. (Closes: #608983, Closes: #610289)
     + Added Files:
-      - debian/nginx-common.preinst
+      - debian/nginx-ee.preinst
     + Modified Files:
       - debian/rules
-    + Moved debian/nginx-common.logrotate to debian/logrotate.
-  * Added common files to nginx-common package. (Closes: #610290)
+    + Moved debian/nginx-ee.logrotate to debian/logrotate.
+  * Added common files to nginx-ee package. (Closes: #610290)
     + Removed Files:
       - debian/nginx-full.dirs
       - debian/nginx-light.dirs
@@ -1120,11 +1387,11 @@ nginx (0.8.54-4) unstable; urgency=low
       - debian/nginx-extras.install
       - debian/nginx.*
     + Added Files:
-      - debian/nginx-common.default
-      - debian/nginx-common.dirs
-      - debian/nginx-common.init.d
-      - debian/nginx-common.install
-      - debian/nginx-common.manpages
+      - debian/nginx-ee.default
+      - debian/nginx-ee.dirs
+      - debian/nginx-ee.init.d
+      - debian/nginx-ee.install
+      - debian/nginx-ee.manpages
       - debian/logrotate
     + Modified Files:
       - debian/nginx-extras.dirs
@@ -1132,8 +1399,8 @@ nginx (0.8.54-4) unstable; urgency=low
       - debian/rules
   * debian/nginx-*.install: (Closes: #609797)
     + Removed NEWS.Debian from nginx-{full,light,extras}.install.
-    + Added NEWS.Debian to nginx-common.install.
-  * nginx-common.postinst:
+    + Added NEWS.Debian to nginx-ee.install.
+  * nginx-ee.postinst:
     + Enforce /var/log/nginx mode and user:group. (Closes: #610983)
     + Enforce /var/log/nginx/*.log mode and user:group. (Closes: #612832)
   * debian/rules:
@@ -1150,7 +1417,7 @@ nginx (0.8.54-4) unstable; urgency=low
 
   [Kartik Mistry]
   * debian/*.lintian-overrides:
-    + Add Lintian overrides for nginx man page. We've manpage in nginx-common
+    + Add Lintian overrides for nginx man page. We've manpage in nginx-ee
       binary
 
  -- Michael Lustfield <mtecknology@ubuntu.com>  Thu, 03 Mar 2011 23:39:07 +0530
